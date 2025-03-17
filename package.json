@@ -1,6 +1,7 @@
 {
   "name": "vscode-ai-assistant",
   "displayName": "vscode-ai-assistant",
+  "publisher": "yaxingson",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -9,15 +10,37 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
   "main": "./out/extension.js",
+  "activationEvents": [],
   "contributes": {
     "commands": [
       {
         "command": "vscode-ai-assistant.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "vscode-ai-assistant.showModel",
+        "title": "Show Model"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "aiAssistant",
+          "title": "AI Assistant",
+          "icon": "src/resources/assistant.svg"
+        }
+      ]
+    },
+    "views": {
+      "aiAssistant": [
+        {
+          "id": "view.model",
+          "name": "AI Assistant",
+          "icon": "src/resources/assistant.svg"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
@@ -25,17 +48,24 @@
     "watch": "tsc -watch -p ./",
     "pretest": "pnpm run compile && pnpm run lint",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vitest --run",
+    "vscode:package":"vsce package --yarn",
+    "vscode:publish":"vsce publish --yarn"
   },
   "devDependencies": {
-    "@types/vscode": "^1.98.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
+    "@types/vscode": "^1.98.0",
     "@typescript-eslint/eslint-plugin": "^8.25.0",
     "@typescript-eslint/parser": "^8.25.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
     "eslint": "^9.21.0",
     "typescript": "^5.7.3",
-    "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
+    "vitest": "^3.0.8"
+  },
+  "dependencies": {
+    "acorn": "^8.14.1",
+    "acorn-walk": "^8.3.4"
   }
 }
